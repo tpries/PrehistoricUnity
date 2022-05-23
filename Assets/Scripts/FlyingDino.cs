@@ -56,7 +56,7 @@ public class FlyingDino : MonoBehaviour
         //check for the distance from the center
         mouse_distance.x = (lookInput.x - center.x) / center.x;
         mouse_distance.y = (lookInput.y - center.y) / center.y;
-        mouse_distance = Vector2.ClampMagnitude(mouse_distance, 1.5f);
+        mouse_distance = Vector2.ClampMagnitude(mouse_distance, .5f);
 
         //rolling through space
         roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), roll_acc * Time.deltaTime);
@@ -72,6 +72,11 @@ public class FlyingDino : MonoBehaviour
         else
         {
             animator.SetBool("active_flight", false);
+
+            if(this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
+            {
+                this.rigid_body.velocity = new Vector3(0, 0, 0);
+            }
         }
 
         //speed instantiation
@@ -88,7 +93,7 @@ public class FlyingDino : MonoBehaviour
             straight = 25.0f;
         }
 
-        if (transform.forward.y < -0.8)
+        if (transform.forward.y < -0.85)
         {
             animator.SetBool("sturz", true);
         }
@@ -97,7 +102,7 @@ public class FlyingDino : MonoBehaviour
             animator.SetBool("sturz", false);
         }
 
-        this.DISPLAY_FLOAT = transform.forward.y;
+        this.DISPLAY_FLOAT = Input.GetAxisRaw("Vertical") * straight;
 
         // set animation
         if (this.rigid_body.velocity.magnitude < 30f)
