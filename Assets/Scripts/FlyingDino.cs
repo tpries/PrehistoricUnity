@@ -9,7 +9,7 @@ public class FlyingDino : MonoBehaviour
     private float forward, upward, sideward;
 
     //acceleration
-    private float forward_acc = 20.0f, side_acc = 10.0f, ascend_acc = 10.0f;
+    private float forward_acc = 20.0f;
 
     //mouse control, rotation
     public float rotatespeed = 50.0f;
@@ -135,9 +135,9 @@ public class FlyingDino : MonoBehaviour
 
         // check for shift-L 
         // if key is pressed dino will lower y position
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log(transform.up);
+            this.rigid_body.AddForce(new Vector3(0f, -10f, 0f));
         }
 
         Vector3 direction = transform.forward * forward * 30 * Time.deltaTime + transform.right * sideward * Time.deltaTime + transform.up * upward * Time.deltaTime;
