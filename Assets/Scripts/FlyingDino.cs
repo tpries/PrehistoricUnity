@@ -16,7 +16,7 @@ public class FlyingDino : MonoBehaviour
     private Vector2 lookInput, center, mouse_distance;
 
     private float roll;
-    public float roll_speed = 50f, roll_acc = 7.0f;
+    public float roll_speed = 50f, roll_acc = 30.0f;
     
     private Rigidbody rigid_body;
     private Animator animator;
@@ -27,7 +27,11 @@ public class FlyingDino : MonoBehaviour
     void Start() {
 
         animator = GetComponent<Animator>();
+
         rigid_body = GetComponent<Rigidbody>();
+        rigid_body.drag = 0.75f;
+        rigid_body.mass = 0.5f;
+        rigid_body.angularDrag = 10f;
 
         transform.position = new Vector3(500f, 100f, 500f);
         
@@ -56,7 +60,7 @@ public class FlyingDino : MonoBehaviour
         //check for the distance from the center
         mouse_distance.x = (lookInput.x - center.x) / center.x;
         mouse_distance.y = (lookInput.y - center.y) / center.y;
-        mouse_distance = Vector2.ClampMagnitude(mouse_distance, .5f);
+        mouse_distance = Vector2.ClampMagnitude(mouse_distance, 1.5f);
 
         //rolling through space
         roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), roll_acc * Time.deltaTime);
@@ -84,14 +88,29 @@ public class FlyingDino : MonoBehaviour
         //sideward = Mathf.Lerp(sideward, Input.GetAxisRaw("Horizontal") * side, side_acc * Time.deltaTime);
         //upward = Mathf.Lerp(upward, Input.GetAxisRaw("Hover") * ascend, ascend_acc * Time.deltaTime);
 
+        // change speed depending on look direction
+        if (mouse_distance.y > 1)
+        {
+            straight = 40f;
+        }
+        else if (mouse_distance.y < -1)
+        {
+            straight = 150f;
+        }
+        else
+        {
+            straight = 100f;
+        }
+
         // geht straight runter mit der Zeit?
         //speed up when going down/ slower when ascending
-        straight -= transform.forward.y * Time.deltaTime * 20.0f;
+        /*straight -= transform.forward.y * Time.deltaTime * 20.0f;
         //minimal speed
         if (straight < 25.0f)
         {
             straight = 25.0f;
         }
+        */
 
         if (transform.forward.y < -0.85)
         {
