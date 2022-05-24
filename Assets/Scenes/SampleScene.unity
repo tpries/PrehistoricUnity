@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 435409904}
   - component: {fileID: 435409903}
   - component: {fileID: 435409902}
+  - component: {fileID: 435409905}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -201,6 +202,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &435409905
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435409901}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,15 +325,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f90ca25da55f69241ac1577e3f64180c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f90ca25da55f69241ac1577e3f64180c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 550.72
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f90ca25da55f69241ac1577e3f64180c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 667.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f90ca25da55f69241ac1577e3f64180c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -496,3 +513,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &1633511657
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633511651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 6.72
+  m_Height: 5.27
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

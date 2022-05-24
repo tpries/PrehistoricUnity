@@ -33,7 +33,7 @@ public class FlyingDino : MonoBehaviour
         rigid_body.mass = 0.5f;
         rigid_body.angularDrag = 10f;
 
-        transform.position = new Vector3(500f, 100f, 500f);
+        transform.position = new Vector3(0f, 400f, 0f);
         
         //instantiate the center of the screen
         center.x = Screen.width * 0.5f;
@@ -131,6 +131,13 @@ public class FlyingDino : MonoBehaviour
         else
         {
             animator.SetBool("idle_air", false);
+        }
+
+        // check for shift-L 
+        // if key is pressed dino will lower y position
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log(transform.up);
         }
 
         Vector3 direction = transform.forward * forward * 30 * Time.deltaTime + transform.right * sideward * Time.deltaTime + transform.up * upward * Time.deltaTime;
