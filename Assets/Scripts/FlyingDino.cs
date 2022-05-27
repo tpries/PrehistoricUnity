@@ -33,7 +33,7 @@ public class FlyingDino : MonoBehaviour
         rigid_body.mass = 0.5f;
         rigid_body.angularDrag = 10f;
 
-        transform.position = new Vector3(0f, 400f, 0f);
+        transform.position = new Vector3(0f, 300f, 0f);
         
         //instantiate the center of the screen
         center.x = Screen.width * 0.5f;
