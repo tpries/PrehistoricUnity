@@ -22,6 +22,8 @@ public class FlyingDino : MonoBehaviour
     private Animator animator;
 
     public float DISPLAY_FLOAT;
+
+    private int collision_counter = 0;
     
     // Start is called before the first frame update
     void Start() {
@@ -46,6 +48,8 @@ public class FlyingDino : MonoBehaviour
         DinoMovement();
 
         CameraFollows();
+
+        //Collisions();
 
         //Borders();
     
@@ -154,6 +158,18 @@ public class FlyingDino : MonoBehaviour
         Camera.main.transform.LookAt(transform.position + transform.forward * 30.0f);
     }
 
+    /*void Collisions()
+    {
+        int actual_counter = ObjectScript.getCounter();
+
+        if(actual_counter > collision_counter)
+        {
+            FlyingDino.transform.localScale += new Vector(5f, 5f, 5f);
+            collision_counter = actual_counter;
+        }
+
+    }*/
+
     void Borders()
     {
         //some borders
@@ -186,5 +202,6 @@ public class FlyingDino : MonoBehaviour
         }
         */
     }
+
 }
 
