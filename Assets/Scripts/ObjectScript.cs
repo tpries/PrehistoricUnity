@@ -12,6 +12,8 @@ public class ObjectScript : MonoBehaviour
     public GameObject goal;
     public int counter;
 
+    public FlyingDino dino;
+
     // Update is called once per frame
     void Start()
     {
@@ -23,6 +25,7 @@ public class ObjectScript : MonoBehaviour
         startTime = Time.time;
         destroy = false;
     }
+
     void Update()
     {
         //rotation of the object
@@ -59,7 +62,8 @@ public class ObjectScript : MonoBehaviour
     {
         destroy = true;
         counter++;
-        other.transform.localScale += new Vector3(1f, 1f, 1f);
+        dino.Grow();
+        //other.transform.localScale += new Vector3(1f, 1f, 1f);
     }
 
     public int getCounter()

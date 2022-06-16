@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FlyingDino : MonoBehaviour
 {
+
+    //camera
+    public Vector3 camera;
+
     //speed
     public float straight = 100.0f, side = 0.0f, ascend = 0.0f;
     private float forward, upward, sideward;
@@ -22,6 +26,9 @@ public class FlyingDino : MonoBehaviour
     private Animator animator;
 
     public float DISPLAY_FLOAT;
+
+    private float camera_height_offset = 5f;
+    private float camera_distance_offset = 20f;
 
     private int collision_counter = 0;
     
@@ -153,22 +160,19 @@ public class FlyingDino : MonoBehaviour
     void CameraFollows()
     {
         //camera movement
-        Vector3 camera = transform.position - transform.forward * 20.0f + Vector3.up * 5.0f;
+        camera = transform.position - transform.forward * camera_distance_offset + Vector3.up * this.camera_height_offset;
         Camera.main.transform.position = camera;
         Camera.main.transform.LookAt(transform.position + transform.forward * 30.0f);
     }
-
-    /*void Collisions()
+   
+    public void Grow()
     {
-        int actual_counter = ObjectScript.getCounter();
+        this.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
+        this.camera_distance_offset += 0.5f;
+        this.camera_height_offset += 0.5f;
+        this.camera_height_offset += 0.5f;
+    }
 
-        if(actual_counter > collision_counter)
-        {
-            FlyingDino.transform.localScale += new Vector(5f, 5f, 5f);
-            collision_counter = actual_counter;
-        }
-
-    }*/
 
     void Borders()
     {
