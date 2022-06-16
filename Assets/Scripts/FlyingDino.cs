@@ -12,7 +12,7 @@ public class FlyingDino : MonoBehaviour
     private float forward_acc = 20.0f;
 
     //mouse control, rotation
-    public float rotatespeed = 50.0f;
+    public float rotatespeed = 80.0f;
     private Vector2 lookInput, center, mouse_distance;
 
     private float roll;
@@ -39,7 +39,7 @@ public class FlyingDino : MonoBehaviour
         rigid_body.mass = 0.5f;
         rigid_body.angularDrag = 10f;
 
-        transform.position = new Vector3(0f, 300f, 0f);
+        transform.position = new Vector3(2500f, 300f, 2500f);
         
         //instantiate the center of the screen
         center.x = Screen.width * 0.5f;
