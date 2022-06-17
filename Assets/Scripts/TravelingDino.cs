@@ -20,7 +20,11 @@ public class TravelingDino : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        Debug.Log(transform.position);
+        Debug.Log(terrain.SampleHeight(transform.position));
+        Debug.Log(targets[current].position);
+        Debug.Log("-----");
+
         if (transform.position != targets[current].position)
         {
 
