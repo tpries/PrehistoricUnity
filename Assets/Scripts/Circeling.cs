@@ -16,6 +16,6 @@ public class Circeling : MonoBehaviour
     {
         transform.position = cadaver.position + new Vector3(0f, off_set, 0f);
     // - speed because i cant be arsed to turn the dino around right now
-    transform.RotateAround(transform.position, Vector3.up, -speed * Time.deltaTime);
+    transform.RotateAround(transform.position, Vector3.up, speed * Time.deltaTime);
     }
 }
