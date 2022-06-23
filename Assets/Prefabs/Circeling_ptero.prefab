@@ -228,6 +228,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3117558689545890362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3519310016471370741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de84609e6bb3a5348b683a6ae80b5d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intervall: 11
+  sound_name: Screech
+  random: 1
 --- !u!4 &4295529682254713167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6656d95d523b8334cba775a462051e35, type: 3}

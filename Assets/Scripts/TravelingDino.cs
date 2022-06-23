@@ -14,13 +14,13 @@ public class TravelingDino : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(transform.position.x, terrain.SampleHeight(transform.position), transform.position.y);
+        transform.position = new Vector3(transform.parent.position.x + transform.localPosition.x, terrain.SampleHeight(transform.parent.position + transform.localPosition), transform.parent.position.z + transform.localPosition.z);
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+
         if (transform.position != targets[current].position)
         {
 

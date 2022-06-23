@@ -10,18 +10,18 @@ public class FlyingDino : MonoBehaviour
     public Vector3 camera;
 
     //speed
-    public float straight = 100.0f, side = 0.0f, ascend = 0.0f;
+    public float straight = 200.0f, side = 0.0f, ascend = 0.0f;
     private float forward, upward, sideward;
 
     //acceleration
-    private float forward_acc = 20.0f;
+    private float forward_acc = 100.0f;
 
     //mouse control, rotation
-    public float rotatespeed = 50.0f;
+    public float rotatespeed = 80.0f;
     private Vector2 lookInput, center, mouse_distance;
 
     private float roll;
-    public float roll_speed = 50f, roll_acc = 30.0f;
+    public float roll_speed = 150f, roll_acc = 130.0f;
     
     private Rigidbody rigid_body;
     private Animator animator;
@@ -37,7 +37,7 @@ public class FlyingDino : MonoBehaviour
     void Start() {
 
         RenderSettings.fogColor = Color.white;
-        RenderSettings.fogDensity = 0.00005f;
+        RenderSettings.fogDensity = 0.0001f;
         RenderSettings.fog = true;
 
         animator = GetComponent<Animator>();
@@ -47,7 +47,7 @@ public class FlyingDino : MonoBehaviour
         rigid_body.mass = 0.5f;
         rigid_body.angularDrag = 10f;
 
-        transform.position = new Vector3(0f, 300f, 0f);
+        transform.position = new Vector3(3900f, 2300f, 700f);
         
         //instantiate the center of the screen
         center.x = Screen.width * 0.5f;
@@ -59,6 +59,7 @@ public class FlyingDino : MonoBehaviour
     {
         DinoMovement();
 
+<<<<<<< HEAD
         CameraFollows();
 
         //Collisions();
@@ -67,10 +68,16 @@ public class FlyingDino : MonoBehaviour
 
         
     
+=======
+        CameraFollows();    
+>>>>>>> b107bd683bb626521a6c242cc078f9aba3dfb2fe
     }
 
     void DinoMovement()
     {
+        // play sounds
+        FindObjectOfType<AudioManager>().Play("Flight");
+
         //check where the mouse is
         lookInput.x = Input.mousePosition.x;
         lookInput.y = Input.mousePosition.y;
@@ -78,7 +85,7 @@ public class FlyingDino : MonoBehaviour
         //check for the distance from the center
         mouse_distance.x = (lookInput.x - center.x) / center.x;
         mouse_distance.y = (lookInput.y - center.y) / center.y;
-        mouse_distance = Vector2.ClampMagnitude(mouse_distance, 1.5f);
+        mouse_distance = Vector2.ClampMagnitude(mouse_distance, 5.5f);
 
         //rolling through space
         roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), roll_acc * Time.deltaTime);
@@ -90,14 +97,26 @@ public class FlyingDino : MonoBehaviour
         if (Input.GetAxisRaw("Vertical") > 0)
         {
             animator.SetBool("active_flight", true);
+            FindObjectOfType<AudioManager>().Play("Flapping");
+
         }
         else
         {
             animator.SetBool("active_flight", false);
 
-            if(this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
+            if (this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
             {
                 this.rigid_body.velocity = new Vector3(0, 0, 0);
+            }
+
+            if (this.rigid_body.velocity.magnitude < 30)
+            {
+                FindObjectOfType<AudioManager>().Play("Flapping");
+            }
+            else
+            {
+                // stop flapping wings if no active flight or idle
+                FindObjectOfType<AudioManager>().Stop("Flapping");
             }
         }
 
@@ -109,15 +128,15 @@ public class FlyingDino : MonoBehaviour
         // change speed depending on look direction
         if (mouse_distance.y > 1)
         {
-            straight = 40f;
+            straight = 140f;
         }
         else if (mouse_distance.y < -1)
         {
-            straight = 150f;
+            straight = 550f;
         }
         else
         {
-            straight = 100f;
+            straight = 500f;
         }
 
         // geht straight runter mit der Zeit?
@@ -133,6 +152,7 @@ public class FlyingDino : MonoBehaviour
         if (transform.forward.y < -0.85)
         {
             animator.SetBool("sturz", true);
+            FindObjectOfType<AudioManager>().Stop("Flapping");
         }
         else
         {
@@ -142,13 +162,16 @@ public class FlyingDino : MonoBehaviour
         this.DISPLAY_FLOAT = Input.GetAxisRaw("Vertical") * straight;
 
         // set animation
-        if (this.rigid_body.velocity.magnitude < 30f)
+        if (this.rigid_body.velocity.magnitude < 50f)
         {
             animator.SetBool("idle_air",true);
+
+            FindObjectOfType<AudioManager>().DecreaseVolume("Flight");
         }
         else
         {
             animator.SetBool("idle_air", false);
+            FindObjectOfType<AudioManager>().IncreaseVolume("Flight");
         }
 
         // check for shift-L 
