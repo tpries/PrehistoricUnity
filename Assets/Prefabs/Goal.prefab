@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: -2963591641296017221}
   - component: {fileID: 6501957072382692849}
   - component: {fileID: 4971273156121226594}
+  - component: {fileID: 1423013325166622697}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -181,6 +182,10 @@ MonoBehaviour:
   bounce: 1
   destroy: 0
   goal: {fileID: 3285087336956477699}
+  score: 0
+  fails: 0
+  dino: {fileID: 0}
+  interpolationPeriod: 3
 --- !u!23 &6501957072382692849
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -236,6 +241,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1423013325166622697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3285087336956477699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3180c712543e883459068545c011f327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  fails: 0
+  obj: {fileID: 3285087336956477699}
 --- !u!1 &4506830431665074755
 GameObject:
   m_ObjectHideFlags: 0

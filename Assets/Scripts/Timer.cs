@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
 {
     public float timeValue = 90;
     public Text timerText;
+
     void Update()
     {
         if (timeValue > 0)

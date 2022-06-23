@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//THIS IS THE HEART OF IT ALL, OUR FLYING DINOSAUR
 public class FlyingDino : MonoBehaviour
 {
-
+   
     //camera
     public Vector3 camera;
 
@@ -63,6 +64,8 @@ public class FlyingDino : MonoBehaviour
         //Collisions();
 
         //Borders();
+
+        
     
     }
 

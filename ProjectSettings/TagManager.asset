@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Dino
   - Goal
+  - Terrain
   layers:
   - Default
   - TransparentFX
