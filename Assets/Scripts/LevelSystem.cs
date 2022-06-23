@@ -35,6 +35,8 @@ public class LevelSystem : MonoBehaviour
         texts.SetFails();
         count = 0;
         level = 0;
+        life = 20;
+        maxLifes = 20;
     }
 
 
@@ -66,7 +68,7 @@ public class LevelSystem : MonoBehaviour
             {
                 time = time - interpolationPeriod;
 
-                transform.position = new Vector3(Random.Range(1, 999), Random.Range(1000, 2000), Random.Range(1, 999));
+                transform.position = new Vector3(Random.Range(1000, 3000), Random.Range(2000, 3000), Random.Range(4000, 5000));
 
                 // execute block of code here
                 GameObject newAsteroid = Instantiate(asteroid, transform.position, Quaternion.identity) as GameObject;  // instatiate the object
