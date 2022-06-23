@@ -21,6 +21,10 @@ public class LevelSystem : MonoBehaviour
 
     private float scale;
 
+    //for the collisionbar
+    public float life, maxLifes;
+
+
 
     // Update is called once per frame
     void Start()
@@ -98,6 +102,8 @@ public class LevelSystem : MonoBehaviour
     public void IncreaseFails()
     {
         this.fails += 1;
+        life--;
+        texts.UpdateCollisions();
         texts.SetFails();
     }
 

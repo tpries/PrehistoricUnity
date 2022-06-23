@@ -23,6 +23,9 @@ public class TextScript : MonoBehaviour
     private int counter = 1;
     //counts the score and fails
     private int score = 0, fails = 0;
+    //For the collisionline
+    public Image collisions;
+  
 
 
     // Start is called before the first frame update
@@ -41,6 +44,7 @@ public class TextScript : MonoBehaviour
         //and printing it on the canvas
         leveltext.text = "Level: " + counter.ToString();
 
+
     
         //after a certain amount of fails, the game will stop
         if(fails > 20)
@@ -56,6 +60,11 @@ public class TextScript : MonoBehaviour
             finalscore.text = "SCORE: " + score.ToString();
 
         }
+    }
+
+    public void UpdateCollisions()
+    {
+        collisions.fillAmount = Mathf.Clamp(level.life / level.maxLifes, 0, 1f);
     }
 
     public void SetScore()

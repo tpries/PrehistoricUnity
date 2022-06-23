@@ -32,6 +32,7 @@ public class FlyingDino : MonoBehaviour
     private float camera_distance_offset = 20f;
 
     private int collision_counter = 0;
+
     
     // Start is called before the first frame update
     void Start() {
