@@ -51,16 +51,14 @@ public class FlyingDino : MonoBehaviour
     {
         DinoMovement();
 
-        CameraFollows();
-
-        //Collisions();
-
-        //Borders();
-    
+        CameraFollows();    
     }
 
     void DinoMovement()
     {
+        // play sounds
+        FindObjectOfType<AudioManager>().Play("Flight");
+
         //check where the mouse is
         lookInput.x = Input.mousePosition.x;
         lookInput.y = Input.mousePosition.y;
@@ -80,14 +78,26 @@ public class FlyingDino : MonoBehaviour
         if (Input.GetAxisRaw("Vertical") > 0)
         {
             animator.SetBool("active_flight", true);
+            FindObjectOfType<AudioManager>().Play("Flapping");
+
         }
         else
         {
             animator.SetBool("active_flight", false);
 
-            if(this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
+            if (this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
             {
                 this.rigid_body.velocity = new Vector3(0, 0, 0);
+            }
+
+            if (this.rigid_body.velocity.magnitude < 30)
+            {
+                FindObjectOfType<AudioManager>().Play("Flapping");
+            }
+            else
+            {
+                // stop flapping wings if no active flight or idle
+                FindObjectOfType<AudioManager>().Stop("Flapping");
             }
         }
 
@@ -123,6 +133,7 @@ public class FlyingDino : MonoBehaviour
         if (transform.forward.y < -0.85)
         {
             animator.SetBool("sturz", true);
+            FindObjectOfType<AudioManager>().Stop("Flapping");
         }
         else
         {
@@ -132,13 +143,16 @@ public class FlyingDino : MonoBehaviour
         this.DISPLAY_FLOAT = Input.GetAxisRaw("Vertical") * straight;
 
         // set animation
-        if (this.rigid_body.velocity.magnitude < 30f)
+        if (this.rigid_body.velocity.magnitude < 50f)
         {
             animator.SetBool("idle_air",true);
+
+            FindObjectOfType<AudioManager>().DecreaseVolume("Flight");
         }
         else
         {
             animator.SetBool("idle_air", false);
+            FindObjectOfType<AudioManager>().IncreaseVolume("Flight");
         }
 
         // check for shift-L 
