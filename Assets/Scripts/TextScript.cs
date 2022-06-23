@@ -44,6 +44,7 @@ public class TextScript : MonoBehaviour
         //and printing it on the canvas
         leveltext.text = "Level: " + counter.ToString();
 
+        UpdateCollisions();
 
     
         //after a certain amount of fails, the game will stop
