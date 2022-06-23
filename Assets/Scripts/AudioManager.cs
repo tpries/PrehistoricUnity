@@ -6,10 +6,21 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
+    public Sound[] explosions;
+
     // Start is called before the first frame update
     void Awake()
     {
         foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+        }
+
+        foreach (Sound s in explosions)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -70,6 +81,15 @@ public class AudioManager : MonoBehaviour
         if (s != null && s.source.isPlaying)
         {
             StartCoroutine(AudioHelper.FadeOutVolume(s.source, s.fadeTimeVolume, s.volume));
+        }
+    }
+
+    public void PlayExplosion(int index)
+    {
+        Sound s = explosions[index];
+        if (s != null)
+        {
+            s.source.Play();
         }
     }
 }

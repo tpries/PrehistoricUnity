@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class GoalScript : MonoBehaviour
 {
-    public GameObject obj;
-    public LevelSystem level_sys;
+    private GameObject obj;
+    private LevelSystem level_sys;
 
     void Start()
     {
-        this.obj = obj;
+        obj = this.gameObject;
+        level_sys = FindObjectOfType<LevelSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.GetComponent<Collider>().tag == "Dino")
         {
             level_sys.IncreaseScore();
-            Destroy(this.gameObject);
+            Explode();
             //destroy = true;
             //this.goal.transform.position = new Vector3(Random.Range(1, 999), Random.Range(250, 350), Random.Range(1, 999));
             //dino.Grow();
@@ -26,10 +28,20 @@ public class GoalScript : MonoBehaviour
         if (other.GetComponent<Collider>().tag == "Terrain")
         {
             level_sys.IncreaseFails();
-            Destroy(this.gameObject);
+            Explode();
         }
         //other.transform.localScale += new Vector3(1f, 1f, 1f);
     }
 
+    void Explode()
+    {
+        // play explosion sound
+        FindObjectOfType<AudioManager>().PlayExplosion(Random.Range(0, 4));
+
+        // explode
+
+        // destroy
+        Destroy(this.gameObject);
+    }
 
 }
