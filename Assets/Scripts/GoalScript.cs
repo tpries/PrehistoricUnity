@@ -35,10 +35,14 @@ public class GoalScript : MonoBehaviour
 
     void Explode()
     {
+    
         // play explosion sound
         FindObjectOfType<AudioManager>().PlayExplosion(Random.Range(0, 4));
 
         // explode
+        GameObject explosion = (GameObject)Resources.Load("prefabs/Explosion", typeof(GameObject));
+        var expl = Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(expl, 3);
 
         // destroy
         Destroy(this.gameObject);

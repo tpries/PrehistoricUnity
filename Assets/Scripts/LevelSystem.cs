@@ -9,8 +9,6 @@ public class LevelSystem : MonoBehaviour
     //to print the score and collisions, we have to hand them to the TextScript
     private TextScript texts;
 
-    //the asteroid is to be catched 
-    public GameObject asteroid;
     //score: how many asteroids are catched
     //fails: how many collisions there are between asteroids and earth
     private int score, fails, count, level;
@@ -72,13 +70,16 @@ public class LevelSystem : MonoBehaviour
 
                 transform.position = new Vector3(Random.Range(1000, 3000), Random.Range(2000, 3000), Random.Range(4000, 5000));
 
+                // get prefab to instantiate
+                GameObject asteroid = (GameObject)Resources.Load("prefabs/Asteroid", typeof(GameObject));
+
                 // execute block of code here
                 GameObject newAsteroid = Instantiate(asteroid, transform.position, Quaternion.identity) as GameObject;  // instatiate the object
                 scale = Random.Range(20, 200);
                 newAsteroid.transform.localScale = new Vector3(scale, scale, scale); // change its local scale in x y z format
                 float mass = scale;
                 float side_wards_movement = Random.Range(-(mass * mass), (mass * mass));
-                newAsteroid.GetComponent<Rigidbody>().AddForce(Physics.gravity * (mass * mass) / 1.5f + new Vector3(side_wards_movement, 0, side_wards_movement));
+                newAsteroid.GetComponent<Rigidbody>().AddForce(Physics.gravity * (mass * mass) / 1.2f + new Vector3(side_wards_movement, 0, side_wards_movement));
 
             }
 
