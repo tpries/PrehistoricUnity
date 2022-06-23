@@ -60,18 +60,7 @@ public class FlyingDino : MonoBehaviour
     {
         DinoMovement();
 
-<<<<<<< HEAD
         CameraFollows();
-
-        //Collisions();
-
-        //Borders();
-
-        
-    
-=======
-        CameraFollows();    
->>>>>>> b107bd683bb626521a6c242cc078f9aba3dfb2fe
     }
 
     void DinoMovement()

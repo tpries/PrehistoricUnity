@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4616913197609167196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4616913197609167198}
+  - component: {fileID: 4616913197609167199}
+  m_Layer: 0
+  m_Name: Audiomanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4616913197609167198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616913197609167196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4616913197609167199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616913197609167196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ea4569aed2aeb45b046d822bf9e3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Flight
+    clip: {fileID: 8300000, guid: a0028fbbfe2c32f4799518b34b95a318, type: 3}
+    volume: 0.187
+    pitch: 1
+    maxVolume: 0.492
+    source: {fileID: 0}
+    fadeTimeVolume: 10
+    fadeTime: 3
+  - name: Roar
+    clip: {fileID: 8300000, guid: f09ea350645f0fe44b08376b74783401, type: 3}
+    volume: 1
+    pitch: 0.91
+    maxVolume: 0
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Lava
+    clip: {fileID: 8300000, guid: 40ed95f3355529b42b9822eadc55bdcb, type: 3}
+    volume: 1
+    pitch: 0.91
+    maxVolume: 0
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Birds
+    clip: {fileID: 8300000, guid: e2eb44b6b8fc07d438749d76c12e2522, type: 3}
+    volume: 0.19
+    pitch: 0.91
+    maxVolume: 0
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Eating
+    clip: {fileID: 8300000, guid: 06c6b0073490b23438b5e1455c4fb226, type: 3}
+    volume: 0.216
+    pitch: 0.91
+    maxVolume: 0
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Screech
+    clip: {fileID: 8300000, guid: 58999997876d13c419151eb564f82bd9, type: 3}
+    volume: 0.112
+    pitch: 0.73
+    maxVolume: 0
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Brachio
+    clip: {fileID: 8300000, guid: 15d96579f4b725b42b2f8991d4825950, type: 3}
+    volume: 0.19
+    pitch: 0.91
+    maxVolume: 0
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Flapping
+    clip: {fileID: 8300000, guid: 5951dcf8b6b87994d93718ed694f9dfc, type: 3}
+    volume: 1
+    pitch: 0.91
+    maxVolume: 0.251
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Step
+    clip: {fileID: 8300000, guid: c38cbbaba3c8258469cc2662d3bd2f60, type: 3}
+    volume: 0.269
+    pitch: 1.02
+    maxVolume: 0.251
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
