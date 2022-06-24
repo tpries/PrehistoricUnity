@@ -35,7 +35,8 @@ public class FlyingDino : MonoBehaviour
 
     
     // Start is called before the first frame update
-    void Start() {
+    void Start() 
+    {
 
         RenderSettings.fogColor = Color.white;
         RenderSettings.fogDensity = 0.0001f;

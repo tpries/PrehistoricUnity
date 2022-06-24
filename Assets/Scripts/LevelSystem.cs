@@ -71,9 +71,9 @@ public class LevelSystem : MonoBehaviour
 
                 // execute block of code here
                 GameObject newAsteroid = Instantiate(asteroid, transform.position, Quaternion.identity) as GameObject;  // instatiate the object
-                scale = Random.Range(20, 200);
+                scale = Random.Range(20, 100);
                 newAsteroid.transform.localScale = new Vector3(scale, scale, scale); // change its local scale in x y z format
-                float mass = scale;
+                float mass = scale*1.5f;
                 float side_wards_movement = Random.Range(-(mass * mass), (mass * mass));
                 newAsteroid.GetComponent<Rigidbody>().AddForce(Physics.gravity * (mass * mass) / 1.2f + new Vector3(side_wards_movement, 0, side_wards_movement));
 
