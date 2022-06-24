@@ -22,17 +22,13 @@ public class LevelSystem : MonoBehaviour
     //for the collisionbar
     public float life, maxLifes;
 
-
-
     // Update is called once per frame
-    void Start()
+    void Awake()
     {   //instantiate
         score = this.score;
         fails = this.fails;
 
-        texts = FindObjectOfType<TextScript>();
-        texts.SetScore();
-        texts.SetFails();
+        texts = GameObject.FindGameObjectWithTag("Text").GetComponent<TextScript>();
         count = 0;
         level = 0;
         life = 20;
@@ -101,7 +97,7 @@ public class LevelSystem : MonoBehaviour
     public void IncreaseScore()
     {
         this.score += 1;
-        texts.SetScore();
+        texts.SetScore(this.score);
     }
 
     public void IncreaseFails()
@@ -109,7 +105,7 @@ public class LevelSystem : MonoBehaviour
         this.fails += 1;
         life--;
         texts.UpdateCollisions();
-        texts.SetFails();
+        texts.SetFails(this.fails);
     }
 
     public int getScore()

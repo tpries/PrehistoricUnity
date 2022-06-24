@@ -7,6 +7,8 @@ TagManager:
   - Dino
   - Goal
   - Terrain
+  - LevelSystem
+  - Text
   layers:
   - Default
   - TransparentFX

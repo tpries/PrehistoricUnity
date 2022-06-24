@@ -10,7 +10,7 @@ public class GoalScript : MonoBehaviour
     void Start()
     {
         obj = this.gameObject;
-        level_sys = FindObjectOfType<LevelSystem>();
+        level_sys = GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>();
     }
 
     private void OnTriggerEnter(Collider other)

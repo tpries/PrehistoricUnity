@@ -18,7 +18,7 @@ public class TextScript : MonoBehaviour
     //the collisions
     public Text collision_text;
 
-    public LevelSystem level;
+    private LevelSystem level;
     //counts the level
     private int counter = 1;
     //counts the score and fails
@@ -31,9 +31,15 @@ public class TextScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        level = GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>();
+
         leveltext.text = "Level: " + counter.ToString();
         gametext.text = "";
         finalscore.text = "";
+
+        collision_text.text = "COLLISIONS: 0";
+        score_text.text = "SCORE: 0";
+
     }
 
     // Update is called once per frame
@@ -68,15 +74,24 @@ public class TextScript : MonoBehaviour
         collisions.fillAmount = Mathf.Clamp(level.life / level.maxLifes, 0, 1f);
     }
 
-    public void SetScore()
+    public void SetScore(int score)
     {
-        score = level.getScore();
+
+        // we encountered the problem that apparently more than one LevelSystem instance existed at runtime
+        // the other instance would then always set the value to 0
+        // this is our quick and hacky fix
+        if (score == 0) return;
+        
         score_text.text = "SCORE: " + score.ToString();
     }
 
-    public void SetFails()
+    public void SetFails(int fails)
     {
-        fails = level.getFails();
+        // we encountered the problem that apparently more than one LevelSystem instance existed at runtime
+        // the other instance would then always set the value to 0
+        // this is our quick and hacky fix
+        if (fails == 0) return;
+
         collision_text.text = "COLLISIONS: " + fails.ToString();
     }
 }
