@@ -35,8 +35,7 @@ public class FlyingDino : MonoBehaviour
     private float camera_height_offset = 5f;
     private float camera_distance_offset = 20f;
 
-    private int collision_counter = 0;
-
+    public LevelSystem level_sys;
 
     // Start is called before the first frame update
     void Start()
@@ -44,8 +43,8 @@ public class FlyingDino : MonoBehaviour
 
         // set straight acc and upwards relative to straight
         straight = speed_base;
-        straight_accelerated = speed_base + 100;
-        straight_upwards = speed_base - 100;
+        straight_accelerated = speed_base + 400;
+        straight_upwards = speed_base - 400;
 
         // get animator
         animator = GetComponent<Animator>();
@@ -223,16 +222,15 @@ public class FlyingDino : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 1000.0f);
         }
+    }
 
-        /*
-        //position of the terrain
-        float now = Terrain.GetHeight(transform.position);
-        //border for the terrain
-        if (now > transform.position.y)
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.GetComponent<Collider>().tag == "Asteroid")
         {
-            transform.position = new Vector3(transform.position.x, now, transform.position.z);
+            level_sys.IncreaseScore();
         }
-        */
     }
 
 }

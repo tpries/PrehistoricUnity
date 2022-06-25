@@ -5,12 +5,10 @@ using UnityEngine;
 public class GoalScript : MonoBehaviour
 {
     private GameObject obj;
-    private LevelSystem level_sys;
 
     void Start()
     {
         obj = this.gameObject;
-        level_sys = GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +16,6 @@ public class GoalScript : MonoBehaviour
 
         if (other.GetComponent<Collider>().tag == "Dino")
         {
-            level_sys.IncreaseScore();
             Explode();
             //destroy = true;
             //this.goal.transform.position = new Vector3(Random.Range(1, 999), Random.Range(250, 350), Random.Range(1, 999));
@@ -27,7 +24,6 @@ public class GoalScript : MonoBehaviour
 
         if (other.GetComponent<Collider>().tag == "Terrain")
         {
-            level_sys.IncreaseFails();
             Explode();
         }
         //other.transform.localScale += new Vector3(1f, 1f, 1f);
@@ -37,7 +33,7 @@ public class GoalScript : MonoBehaviour
     {
 
         // play explosion sound
-        FindObjectOfType<AudioManager>().PlayExplosion(0);// Random.Range(0, 4));
+        FindObjectOfType<AudioManager>().PlayExplosion(Random.Range(0, 4));
 
         // explode
         GameObject explosion = (GameObject)Resources.Load("prefabs/Explosion", typeof(GameObject));

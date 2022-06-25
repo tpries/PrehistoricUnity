@@ -17,9 +17,7 @@ public class TextScript : MonoBehaviour
     //the fial score
     public Text finalscore;
 
-
-
-    private LevelSystem level;
+    public LevelSystem level_sys;
 
     //counts the level
     private int counter = 1;
@@ -33,10 +31,6 @@ public class TextScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        level = GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>();
-
-
         leveltext.text = "Level: " + counter.ToString();
         gametext.text = "";
         finalscore.text = "";
@@ -50,7 +44,7 @@ public class TextScript : MonoBehaviour
     {
 
         //counting the level
-        counter = level.getLevel();
+        counter = level_sys.getLevel();
         //and printing it on the canvas
         leveltext.text = "Level: " + counter.ToString();
 
@@ -59,18 +53,17 @@ public class TextScript : MonoBehaviour
 
     }
 
+    // BEAUTIFY
     public void UpdateCollisions()
     {
-        float life = GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>().life;
-        float maxLifes = GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>().maxLifes;
-        float duration = 0.75f * (level.life / level.maxLifes);
-        collisions.DOFillAmount(level.life / level.maxLifes, duration);
+        float duration = 0.75f * (level_sys.life / level_sys.maxLifes);
+        collisions.DOFillAmount(level_sys.life / level_sys.maxLifes, duration);
         Color newColor = Color.green;
-        if (level.life < level.maxLifes * 0.25f)
+        if (level_sys.life < level_sys.maxLifes * 0.25f)
         {
             newColor = Color.red;
         }
-        else if (level.life < level.maxLifes * 0.66f)
+        else if (level_sys.life < level_sys.maxLifes * 0.66f)
         {
             newColor = new Color(1f, .64f, 0f, 1f);
         }
@@ -99,9 +92,9 @@ public class TextScript : MonoBehaviour
         if (fails == 0) return;
 
         //after a certain amount of fails, the game will stop
-        if (fails > level.maxLifes)
+        if (fails > level_sys.maxLifes)
         {
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOverScene");
         }
 
     }

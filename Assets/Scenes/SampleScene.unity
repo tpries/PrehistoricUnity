@@ -1786,6 +1786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid
       objectReference: {fileID: 0}
+    - target: {fileID: 3285087336956477699, guid: 635fd98c421f21d41a5433c1be24edf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4109636305786671565, guid: 635fd98c421f21d41a5433c1be24edf4, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2499,6 +2503,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1589443654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8314982846528260824, guid: 16517c325c8e20d44af4fee4496fea80, type: 3}
+  m_PrefabInstance: {fileID: 8314982847070548367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1589443656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589443654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bb6bfbdede3d044a7756307030c3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_sys: {fileID: 893842898}
+  terrain: {fileID: 436683240}
 --- !u!1001 &1619430387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3634,6 +3657,7 @@ MonoBehaviour:
   gametext: {fileID: 2006743861}
   score_text: {fileID: 1850205559}
   finalscore: {fileID: 1965724991}
+  level_sys: {fileID: 893842898}
   collisions: {fileID: 49617510}
 --- !u!1001 &2126708645
 PrefabInstance:
@@ -4049,15 +4073,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3998636540516796506, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3998636540516796506, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3998636540516796506, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3998636540516796506, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4113,19 +4137,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4498664705911268502, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_Height
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4498664705911268502, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_Radius
-      value: 15
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498664705911268502, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7158201206699768260, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: straight
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7158201206699768260, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
+      propertyPath: level_sys
+      value: 
+      objectReference: {fileID: 893842898}
+    - target: {fileID: 7158201206699768260, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: speed_base
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8507713471318403939, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8507713471318403939, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9037881959617996442, guid: cd2ff1453e5cd7a4cb366fd6298aa9b7, type: 3}
       propertyPath: m_Materials.Array.data[0]

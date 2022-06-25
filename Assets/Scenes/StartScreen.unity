@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32043b44e0012443a0cde03651df1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: GameOver
+  state: Start
   main_scene: SampleScene
   blinking_text: {fileID: 279701021}
   alpha_step: 1
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 279701022}
   - component: {fileID: 279701021}
   m_Layer: 5
-  m_Name: RestartQuit
+  m_Name: GetStarted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3773585, g: 0.10145959, b: 0.10145959, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -294,7 +294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: << Press R to restart or Q to quit>>
+  m_Text: << Press Spacebar to play>>
 --- !u!222 &279701022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 1285161292}
   - component: {fileID: 1285161291}
   m_Layer: 5
-  m_Name: GameOver
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,7 +381,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: 'Prehistoric Unity
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -390,8 +392,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279834986
-  m_fontColor: {r: 0.41509432, g: 0.09985758, b: 0.09985758, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -577,7 +579,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630548725}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 1e0652873947e554bb85651ac5458967, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: dd0601c9ae1cbe64d99e782328b7e4a6, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
