@@ -64,7 +64,7 @@ public class LevelSystem : MonoBehaviour
             {
                 time = time - interpolationPeriod;
 
-                transform.position = new Vector3(Random.Range(1000, 3000), Random.Range(2000, 3000), Random.Range(4000, 5000));
+                transform.position = new Vector3(Random.Range(1000, 3000), Random.Range(5000, 6000), Random.Range(4000, 5000));
 
                 // get prefab to instantiate
                 GameObject asteroid = (GameObject)Resources.Load("prefabs/Asteroid", typeof(GameObject));

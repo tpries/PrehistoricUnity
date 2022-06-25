@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class StartScreen : MonoBehaviour
+public class SceneHandler : MonoBehaviour
 {
+
+    public string state;
 
     public string main_scene;
 
@@ -19,6 +21,7 @@ public class StartScreen : MonoBehaviour
     public Color color = Color.white;
 
     private float alpha_thresh;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,10 +45,21 @@ public class StartScreen : MonoBehaviour
         blinking_text.color = color;
 
         // start game on space down
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && state.Equals("Start"))
         {
             LoadScene();
         }
+
+        if (Input.GetKeyDown(KeyCode.R) && state.Equals("GameOver"))
+        {
+            LoadScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && state.Equals("GameOver"))
+        {
+            // quit
+        }
+
     }
 
     public void LoadScene()

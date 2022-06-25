@@ -238,7 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32043b44e0012443a0cde03651df1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  main_scene: 
+  state: Start
+  main_scene: SampleScene
   blinking_text: {fileID: 279701021}
   alpha_step: 1
   color: {r: 1, g: 1, b: 1, a: 1}
