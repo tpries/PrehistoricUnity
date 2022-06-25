@@ -9,6 +9,7 @@ TagManager:
   - Terrain
   - LevelSystem
   - Text
+  - Recorded
   layers:
   - Default
   - TransparentFX

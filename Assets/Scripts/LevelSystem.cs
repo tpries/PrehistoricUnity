@@ -15,7 +15,7 @@ public class LevelSystem : MonoBehaviour
     //for time management
     private float time = 0.0f, timestamp = 0.0f, cooldown = 3.0f, buffer = 5.0f;
     //in which frequence asteroids are to be spawned
-    private float interpolationPeriod = 10f;
+    private float interpolationPeriod = 2f;
 
     private float scale;
 
@@ -32,7 +32,7 @@ public class LevelSystem : MonoBehaviour
         count = 0;
         level = 0;
         life = 20;
-        maxLifes = 20;
+        maxLifes = 2;
     }
 
 
@@ -64,7 +64,7 @@ public class LevelSystem : MonoBehaviour
             {
                 time = time - interpolationPeriod;
 
-                transform.position = new Vector3(Random.Range(1000, 3000), Random.Range(2000, 3000), Random.Range(4000, 5000));
+                transform.position = new Vector3(Random.Range(1500, 3600), Random.Range(2000, 2010), Random.Range(1000, 5000));
 
                 // get prefab to instantiate
                 GameObject asteroid = (GameObject)Resources.Load("prefabs/Asteroid", typeof(GameObject));
