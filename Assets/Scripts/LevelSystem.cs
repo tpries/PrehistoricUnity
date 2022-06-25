@@ -15,7 +15,7 @@ public class LevelSystem : MonoBehaviour
     //for time management
     private float time = 0.0f, timestamp = 0.0f, cooldown = 3.0f, buffer = 5.0f;
     //in which frequence asteroids are to be spawned
-    private float interpolationPeriod = 10f;
+    private float interpolationPeriod = 2f;
 
     private float scale;
 
@@ -32,7 +32,7 @@ public class LevelSystem : MonoBehaviour
         count = 0;
         level = 0;
         life = 20;
-        maxLifes = 20;
+        maxLifes = 2;
     }
 
 

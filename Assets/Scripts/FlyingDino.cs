@@ -5,12 +5,16 @@ using UnityEngine;
 //THIS IS THE HEART OF IT ALL, OUR FLYING DINOSAUR
 public class FlyingDino : MonoBehaviour
 {
-   
+
     //camera
     public Vector3 camera;
 
+    // speeds
+    public float speed_base;
+    private float straight, straight_accelerated, straight_upwards;
+
+
     //speed
-    public float straight = 200.0f, side = 0.0f, ascend = 0.0f;
     private float forward, upward, sideward;
 
     //acceleration
@@ -22,7 +26,7 @@ public class FlyingDino : MonoBehaviour
 
     private float roll;
     public float roll_speed = 150f, roll_acc = 130.0f;
-    
+
     private Rigidbody rigid_body;
     private Animator animator;
 
@@ -33,24 +37,27 @@ public class FlyingDino : MonoBehaviour
 
     private int collision_counter = 0;
 
-    
+
     // Start is called before the first frame update
-    void Start() 
+    void Start()
     {
 
-        RenderSettings.fogColor = Color.white;
-        RenderSettings.fogDensity = 0.0001f;
-        RenderSettings.fog = true;
+        // set straight acc and upwards relative to straight
+        straight = speed_base;
+        straight_accelerated = speed_base + 100;
+        straight_upwards = speed_base - 100;
 
+        // get animator
         animator = GetComponent<Animator>();
 
+        // get rigidbody and set values
         rigid_body = GetComponent<Rigidbody>();
         rigid_body.drag = 0.75f;
         rigid_body.mass = 0.5f;
         rigid_body.angularDrag = 10f;
 
         transform.position = new Vector3(3900f, 2300f, 700f);
-        
+
         //instantiate the center of the screen
         center.x = Screen.width * 0.5f;
         center.y = Screen.height * 0.5f;
@@ -119,15 +126,15 @@ public class FlyingDino : MonoBehaviour
         // change speed depending on look direction
         if (mouse_distance.y > 1)
         {
-            straight = 140f;
+            straight = straight_upwards;
         }
         else if (mouse_distance.y < -1)
         {
-            straight = 550f;
+            straight = straight_accelerated;
         }
         else
         {
-            straight = 500f;
+            straight = speed_base;
         }
 
         // geht straight runter mit der Zeit?
@@ -155,7 +162,7 @@ public class FlyingDino : MonoBehaviour
         // set animation
         if (this.rigid_body.velocity.magnitude < 50f)
         {
-            animator.SetBool("idle_air",true);
+            animator.SetBool("idle_air", true);
 
             FindObjectOfType<AudioManager>().DecreaseVolume("Flight");
         }
@@ -185,7 +192,7 @@ public class FlyingDino : MonoBehaviour
         Camera.main.transform.position = camera;
         Camera.main.transform.LookAt(transform.position + transform.forward * 30.0f);
     }
-   
+
     public void Grow()
     {
         this.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
