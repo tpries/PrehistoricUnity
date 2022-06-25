@@ -14,19 +14,12 @@ public class GoalScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.GetComponent<Collider>().tag == "Dino")
+        if (other.GetComponent<Collider>().tag == "Fireball")
         {
-            Explode();
-            //destroy = true;
-            //this.goal.transform.position = new Vector3(Random.Range(1, 999), Random.Range(250, 350), Random.Range(1, 999));
-            //dino.Grow();
+            GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>().IncreaseScore();
         }
+        Explode();
 
-        if (other.GetComponent<Collider>().tag == "Terrain")
-        {
-            Explode();
-        }
-        //other.transform.localScale += new Vector3(1f, 1f, 1f);
     }
 
     void Explode()

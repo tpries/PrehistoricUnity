@@ -92,7 +92,7 @@ public class LevelSystem : MonoBehaviour
             // set asteroid scale and mass for speed
             //scale = Random.Range(20, 50);
             //newAsteroid.transform.localScale = new Vector3(scale, scale, scale);
-            float mass = 5;// scale;
+            float mass = 2;// scale;
             float side_wards_movement = Random.Range(-(mass * mass), (mass * mass));
             newAsteroid.GetComponent<Rigidbody>().AddForce(Physics.gravity * (mass * mass) / 1.2f + new Vector3(side_wards_movement, 0, side_wards_movement));
 

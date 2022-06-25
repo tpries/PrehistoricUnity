@@ -11,6 +11,7 @@ TagManager:
   - Text
   - Recorded
   - Asteroid
+  - Fireball
   layers:
   - Default
   - TransparentFX

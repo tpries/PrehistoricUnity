@@ -5,6 +5,8 @@ using UnityEngine;
 //THIS IS THE HEART OF IT ALL, OUR FLYING DINOSAUR
 public class FlyingDino : MonoBehaviour
 {
+    [SerializeField]
+    private Transform fireballPrefab;
 
     //camera
     public Vector3 camera;
@@ -68,6 +70,12 @@ public class FlyingDino : MonoBehaviour
         DinoMovement();
 
         CameraFollows();
+
+        // shoot fireball on space down
+        if (Input.GetKeyDown("space"))
+        {
+            ShootFireBall();
+        }
     }
 
     void DinoMovement()
@@ -222,6 +230,15 @@ public class FlyingDino : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 1000.0f);
         }
+    }
+
+    public void ShootFireBall()
+    {
+        Transform fireballTransform = Instantiate(fireballPrefab, transform.position + transform.forward*3 + new Vector3(0, 4, 0), Quaternion.identity);
+
+        Vector3 shootDir = Vector3.Normalize(transform.forward);
+
+        fireballTransform.GetComponent<FireballScript>().SetUp(shootDir, this.straight*1.5f);
     }
 
     private void OnTriggerEnter(Collider other)
