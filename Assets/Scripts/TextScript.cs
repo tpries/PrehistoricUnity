@@ -101,7 +101,7 @@ public class TextScript : MonoBehaviour
         //after a certain amount of fails, the game will stop
         if (fails > level.maxLifes)
         {
-            //SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOver");
         }
 
     }

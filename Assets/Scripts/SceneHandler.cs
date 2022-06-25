@@ -18,7 +18,7 @@ public class SceneHandler : MonoBehaviour
 
     private float alpha;
 
-    public Color color = Color.white;
+    public Color color;
 
     private float alpha_thresh;
 
@@ -26,6 +26,7 @@ public class SceneHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        color = blinking_text.color;
         alpha = 0;
         alpha_thresh = 300;
     }
