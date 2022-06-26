@@ -8,54 +8,44 @@ public class FlyingDino : MonoBehaviour
     [SerializeField]
     private Transform fireballPrefab;
 
-    //camera
-    public Vector3 camera;
+    // speed variables
+    public float speedBase;
+    private float speed, straightAccelerated, straightUpwards, forward;
 
-    // speeds
-    public float speed_base;
-    private float straight, straight_accelerated, straight_upwards;
+    public float rotateSpeed = 80.0f;
 
+    // center of the screen
+    private Vector2 center;
 
-    //speed
-    private float forward, upward, sideward;
-
-    //acceleration
-    private float forward_acc = 100.0f;
-
-    //mouse control, rotation
-    public float rotatespeed = 200.0f;
-    private Vector2 lookInput, center, mouse_distance;
-
+    // rotation speed values
     private float roll;
-    public float roll_speed = 300f, roll_acc = 300.0f;
+    public float rollSpeed = 80f, rollAcc = 130.0f;
 
-    private Rigidbody rigid_body;
+    private float cameraHeightOffset = 5f;
+    private float cameraDistanceOffset = 20f;
+
+    // Rigidbody, Animator and LevelSystem
+    private Rigidbody rigidBody;
     private Animator animator;
 
-    public float DISPLAY_FLOAT;
+    public LevelSystem levelSys;
 
-    private float camera_height_offset = 5f;
-    private float camera_distance_offset = 20f;
-
-    public LevelSystem level_sys;
-
-    // Start is called before the first frame update
     void Start()
     {
 
-        // set straight acc and upwards relative to straight
-        straight = speed_base;
-        straight_accelerated = speed_base + 400;
-        straight_upwards = speed_base - 400;
+        // set speed acc and upwards relative to speedBase
+        speed = speedBase;
+        straightAccelerated = speedBase + 400;
+        straightUpwards = speedBase - 400;
 
         // get animator
         animator = GetComponent<Animator>();
 
         // get rigidbody and set values
-        rigid_body = GetComponent<Rigidbody>();
-        rigid_body.drag = 0.75f;
-        rigid_body.mass = 0.5f;
-        rigid_body.angularDrag = 10f;
+        rigidBody = GetComponent<Rigidbody>();
+        rigidBody.drag = 0.75f;
+        rigidBody.mass = 0.5f;
+        rigidBody.angularDrag = 10f;
 
         transform.position = new Vector3(3900f, 1300, 700f);
 
@@ -64,7 +54,10 @@ public class FlyingDino : MonoBehaviour
         center.y = Screen.height * 0.5f;
     }
 
-    // Update is called once per frame
+    // In every update:
+    // Move dino
+    // adjust camera
+    // shoot fireball if wanted
     void Update()
     {
         DinoMovement();
@@ -84,19 +77,18 @@ public class FlyingDino : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Flight");
 
         //check where the mouse is
-        lookInput.x = Input.mousePosition.x;
-        lookInput.y = Input.mousePosition.y;
+        float mouseX = Input.mousePosition.x;
+        float mouseY = Input.mousePosition.y;
 
-        //check for the distance from the center
-        mouse_distance.x = (lookInput.x - center.x) / center.x;
-        mouse_distance.y = (lookInput.y - center.y) / center.y;
-        mouse_distance = Vector2.ClampMagnitude(mouse_distance, 5.5f);
+        //check for the mouse distance from the center
+        Vector2 mouseDistance;
+        mouseDistance.x = (mouseX - center.x) / center.x;
+        mouseDistance.y = (mouseY - center.y) / center.y;
+        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 5.5f);
 
-        //rolling through space
-        roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), roll_acc * Time.deltaTime);
-
-        //rotation
-        transform.Rotate(-mouse_distance.y * rotatespeed * Time.deltaTime, mouse_distance.x * rotatespeed * Time.deltaTime, roll * roll_speed * Time.deltaTime, Space.Self);
+        // roll dino left and right with "a" and "d" and mouse position
+        roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), rollAcc * Time.deltaTime);
+        transform.Rotate(-mouseDistance.y * rotateSpeed * Time.deltaTime, mouseDistance.x * rotateSpeed * Time.deltaTime, roll * rollSpeed * Time.deltaTime, Space.Self);
 
         // set animation for active flight
         if (Input.GetAxisRaw("Vertical") > 0)
@@ -104,19 +96,41 @@ public class FlyingDino : MonoBehaviour
             animator.SetBool("active_flight", true);
             FindObjectOfType<AudioManager>().Play("Flapping");
 
-            forward = Mathf.Lerp(forward, Input.GetAxisRaw("Vertical") * straight, forward_acc * Time.deltaTime);
+            // change speed depending on look direction
+            if (mouseDistance.y > 1) // sturzflug
+            {
+                speed = straightAccelerated;
+                animator.SetBool("sturz", true);
+                FindObjectOfType<AudioManager>().Stop("Flapping");
+            }
+            else if (mouseDistance.y < -1) // upwards is harder
+            {
+                speed = straightUpwards;
+                animator.SetBool("sturz", false);
+
+            }
+            else
+            {
+                speed = speedBase;
+                animator.SetBool("sturz", false);
+
+            }
 
         }
         else
         {
+            speed = 0;
+
             animator.SetBool("active_flight", false);
 
-            if (this.rigid_body.velocity.magnitude >= 0 && Input.GetAxisRaw("Vertical") < 0)
+            // break if "s" is pressed
+            if (this.rigidBody.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
             {
-                this.rigid_body.velocity = new Vector3(0, 0, 0);
+                this.rigidBody.velocity = new Vector3(0, 0, 0);
             }
 
-            if (this.rigid_body.velocity.magnitude < 30)
+            // idle air animation is played when dino is slow
+            if (this.rigidBody.velocity.magnitude < 30)
             {
                 FindObjectOfType<AudioManager>().Play("Flapping");
             }
@@ -125,59 +139,21 @@ public class FlyingDino : MonoBehaviour
                 // stop flapping wings if no active flight or idle
                 FindObjectOfType<AudioManager>().Stop("Flapping");
             }
-
-            forward = 0;
-
         }
-
-        //speed instantiation
-
-        // change speed depending on look direction
-        if (mouse_distance.y > 1)
-        {
-            straight = straight_upwards;
-        }
-        else if (mouse_distance.y < -1)
-        {
-            straight = straight_accelerated;
-        }
-        else
-        {
-            straight = speed_base;
-        }
-
-        // geht straight runter mit der Zeit?
-        //speed up when going down/ slower when ascending
-        /*straight -= transform.forward.y * Time.deltaTime * 20.0f;
-        //minimal speed
-        if (straight < 25.0f)
-        {
-            straight = 25.0f;
-        }
-        */
-
-        if (transform.forward.y < -0.85)
-        {
-            animator.SetBool("sturz", true);
-            FindObjectOfType<AudioManager>().Stop("Flapping");
-        }
-        else
-        {
-            animator.SetBool("sturz", false);
-        }
-
-        this.DISPLAY_FLOAT = Input.GetAxisRaw("Vertical") * straight;
 
         // set animation
-        if (this.rigid_body.velocity.magnitude < 50f)
+        if (this.rigidBody.velocity.magnitude < 50f)
         {
             animator.SetBool("idle_air", true);
 
+            // decrease volume of wind during flight if dino is slow
             FindObjectOfType<AudioManager>().DecreaseVolume("Flight");
         }
         else
         {
             animator.SetBool("idle_air", false);
+            
+            // increase volume of wind during flight if dino is faster
             FindObjectOfType<AudioManager>().IncreaseVolume("Flight");
         }
 
@@ -185,71 +161,43 @@ public class FlyingDino : MonoBehaviour
         // if key is pressed dino will lower y position
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            this.rigid_body.AddForce(new Vector3(0f, -10f, 0f));
+            this.rigidBody.AddForce(new Vector3(0f, -10f, 0f));
         }
 
-        Vector3 direction = transform.forward * forward * 30 * Time.deltaTime + transform.right * sideward * Time.deltaTime + transform.up * upward * Time.deltaTime;
+        // get movement direction (and force)
+        Vector3 direction = transform.forward * speed * 30 * Time.deltaTime;
 
         //the actual movement
-        this.rigid_body.AddForce(direction);
+        this.rigidBody.AddForce(direction);
     }
 
+    // Here we just always update the camera position according to the positon of the dinosaur
     void CameraFollows()
     {
-        //camera movement
-        camera = transform.position - transform.forward * camera_distance_offset + Vector3.up * this.camera_height_offset;
-        Camera.main.transform.position = camera;
+        Camera.main.transform.position = transform.position - transform.forward * cameraDistanceOffset + Vector3.up * cameraHeightOffset;
         Camera.main.transform.LookAt(transform.position + transform.forward * 30.0f);
     }
 
-    public void Grow()
-    {
-        this.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-        this.camera_distance_offset += 0.5f;
-        this.camera_height_offset += 0.5f;
-        this.camera_height_offset += 0.5f;
-    }
-
-
-    void Borders()
-    {
-        //some borders
-        //x axis
-        if (transform.position.x < 0.0f)
-        {
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x > 1000.0f)
-        {
-            transform.position = new Vector3(1000f, transform.position.y, transform.position.z);
-        }
-        //z axis
-        if (transform.position.z < 0.0f)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
-        }
-        if (transform.position.z > 1000.0f)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1000.0f);
-        }
-    }
-
+    // shoot fireball
     public void ShootFireBall()
     {
-
+        // instantiate prefab
         Transform fireballTransform = Instantiate(fireballPrefab, transform.position + transform.forward*3 + new Vector3(0, 4, 0), Quaternion.identity);
 
+        // get shooting direction
         Vector3 shootDir = Vector3.Normalize(transform.forward);
 
-        fireballTransform.GetComponent<FireballScript>().SetUp(shootDir, this.straight*1.5f);
+        // setup fireball
+        fireballTransform.GetComponent<FireballScript>().SetUp(shootDir, speed*1.5f);
     }
 
+    // if dino collides with asteroid, increase score in LevelSystem
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.GetComponent<Collider>().tag == "Asteroid")
         {
-            level_sys.IncreaseScore();
+            levelSys.IncreaseScore();
         }
     }
 

@@ -8,23 +8,17 @@ using UnityEngine.SceneManagement;
 //THIS IS THE SCRIPT FOR ALL THE TEXTS IN THE GAME
 public class TextScript : MonoBehaviour
 {
-    //the level
-    public Text leveltext;
-    //for "game over"
-    public Text gametext;
     //the score during the game
-    public Text score_text;
-    //the fial score
-    public Text finalscore;
-
-    public LevelSystem level_sys;
+    public Text currentScore;
+    
+    public LevelSystem levelSys;
 
     //counts the level
     private int counter = 1;
     //counts the score and fails
     private int score, fails;
-    //For the collisionline
-    public Image collisions;
+    //For the lifebar
+    public Image lifes;
 
     [SerializeField]
     private Text waveText;
@@ -32,55 +26,53 @@ public class TextScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        leveltext.text = "Level: " + counter.ToString();
-        gametext.text = "";
-        finalscore.text = "";
+        currentScore.text = "SCORE: 0";
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //counting the level
-        counter = level_sys.getLevel();
-        //and printing it on the canvas
-        leveltext.text = "Level: " + counter.ToString();
-
+        //For the lifebar
         UpdateCollisions();
     }
 
-    // BEAUTIFY
+    // BEAUTIFY THE LIFEBAR 
+    // gradually reduce the filling of the bar when damage of the terrain gets greater
+    // after ca. a third, the green bar gets orange
+    // and in the end red
     public void UpdateCollisions()
     {
-        float duration = 0.75f * (level_sys.life / level_sys.maxLifes);
-        collisions.DOFillAmount(level_sys.life / level_sys.maxLifes, duration);
+        float duration = 0.75f * (levelSys.life / levelSys.maxLifes);
+        lifes.DOFillAmount(levelSys.life / levelSys.maxLifes, duration);
         Color newColor = Color.green;
-        if (level_sys.life < level_sys.maxLifes * 0.25f)
+        if (levelSys.life < levelSys.maxLifes * 0.25f)
         {
             newColor = Color.red;
         }
-        else if (level_sys.life < level_sys.maxLifes * 0.66f)
+        else if (levelSys.life < levelSys.maxLifes * 0.66f)
         {
+            //this is cool code for "orange" (RGB)
             newColor = new Color(1f, .64f, 0f, 1f);
         }
-        collisions.DOColor(newColor, duration);
+        lifes.DOColor(newColor, duration);
     }
 
     public void SetScore(int score)
     {
-        score_text.text = "SCORE: " + score.ToString();
+        currentScore.text = "SCORE: " + score.ToString();
     }
 
     public void SetFails(int fails)
     {
         //after a certain amount of fails, the game will stop
-        if (fails > level_sys.maxLifes)
+        if (fails > levelSys.maxLifes)
         {
-            Debug.Log("what up");
             SceneManager.LoadScene("GameOverScene");
         }
     }
 
+    // Wave number is a text that should fade in and out
+    // start coroutine therefore
     public void DisplayWaveNumber(int waveNumber)
     {
         waveText.enabled = false;
@@ -89,6 +81,8 @@ public class TextScript : MonoBehaviour
         StartCoroutine(FadeText(waveText, 1f));
     }
 
+    // first fade text in, then out
+    // enable text at beginning and disable at end
     public IEnumerator FadeText(Text text, float t)
     {
 

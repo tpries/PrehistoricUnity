@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//THIS IS THE CODE OF THE ASTEROIDS
 public class GoalScript : MonoBehaviour
 {
-    private GameObject obj;
+    //the asteroid
+    private GameObject enemy;
 
     void Start()
     {
-        obj = this.gameObject;
+       enemy = this.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
+        //when a fireball is shooted at the asteroids, let it explode
+        //and increase the score in the LevelSystem script
         if (other.GetComponent<Collider>().tag == "Fireball")
         {
             GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>().IncreaseScore();
@@ -42,7 +45,7 @@ public class GoalScript : MonoBehaviour
         var expl = Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(expl, 3);
 
-        // destroy
+        // destroy the asteroid
         Destroy(this.gameObject);
     }
 
