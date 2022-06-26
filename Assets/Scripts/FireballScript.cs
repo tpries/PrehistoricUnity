@@ -5,11 +5,11 @@ using UnityEngine;
 public class FireballScript : MonoBehaviour
 {
     private Vector3 movementDirection;
-    private float base_speed;
+    private float baseSpeed;
 
     public void SetUp(Vector3 dir, float base_speed)
     {
-        this.base_speed = base_speed;
+        this.baseSpeed = base_speed;
         this.movementDirection = dir;
         FindObjectOfType<AudioManager>().PlayFireball();
         StartCoroutine(SelfDestruct());
@@ -18,7 +18,7 @@ public class FireballScript : MonoBehaviour
 
     private void Update()
     {
-        float moveSpeed = this.base_speed + 500f;
+        float moveSpeed = this.baseSpeed + 500f;
         transform.position += movementDirection * moveSpeed * Time.deltaTime;
     }
 

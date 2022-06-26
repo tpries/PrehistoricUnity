@@ -12,50 +12,50 @@ public class FlyingDino : MonoBehaviour
     public Vector3 camera;
 
     // speeds
-    public float speed_base;
-    private float straight, straight_accelerated, straight_upwards;
+    public float speedBase;
+    private float straight, straightAccelerated, straightUpwards;
 
 
     //speed
     private float forward, upward, sideward;
 
     //acceleration
-    private float forward_acc = 100.0f;
+    private float forwardAcc = 100.0f;
 
     //mouse control, rotation
-    public float rotatespeed = 80.0f;
-    private Vector2 lookInput, center, mouse_distance;
+    public float rotateSpeed = 80.0f;
+    private Vector2 lookInput, center, mouseDistance;
 
     private float roll;
-    public float roll_speed = 150f, roll_acc = 130.0f;
+    public float rollSpeed = 150f, rollAcc = 130.0f;
 
-    private Rigidbody rigid_body;
+    private Rigidbody rigidBody;
     private Animator animator;
 
     public float DISPLAY_FLOAT;
 
-    private float camera_height_offset = 5f;
-    private float camera_distance_offset = 20f;
+    private float cameraHeightOffset = 5f;
+    private float cameraDistanceOffset = 20f;
 
-    public LevelSystem level_sys;
+    public LevelSystem levelSys;
 
     // Start is called before the first frame update
     void Start()
     {
 
         // set straight acc and upwards relative to straight
-        straight = speed_base;
-        straight_accelerated = speed_base + 400;
-        straight_upwards = speed_base - 400;
+        straight = speedBase;
+        straightAccelerated = speedBase + 400;
+        straightUpwards = speedBase - 400;
 
         // get animator
         animator = GetComponent<Animator>();
 
         // get rigidbody and set values
-        rigid_body = GetComponent<Rigidbody>();
-        rigid_body.drag = 0.75f;
-        rigid_body.mass = 0.5f;
-        rigid_body.angularDrag = 10f;
+        rigidBody = GetComponent<Rigidbody>();
+        rigidBody.drag = 0.75f;
+        rigidBody.mass = 0.5f;
+        rigidBody.angularDrag = 10f;
 
         transform.position = new Vector3(3900f, 2300f, 700f);
 
@@ -88,15 +88,15 @@ public class FlyingDino : MonoBehaviour
         lookInput.y = Input.mousePosition.y;
 
         //check for the distance from the center
-        mouse_distance.x = (lookInput.x - center.x) / center.x;
-        mouse_distance.y = (lookInput.y - center.y) / center.y;
-        mouse_distance = Vector2.ClampMagnitude(mouse_distance, 5.5f);
+        mouseDistance.x = (lookInput.x - center.x) / center.x;
+        mouseDistance.y = (lookInput.y - center.y) / center.y;
+        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 5.5f);
 
         //rolling through space
-        roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), roll_acc * Time.deltaTime);
+        roll = Mathf.Lerp(roll, Input.GetAxisRaw("Roll"), rollAcc * Time.deltaTime);
 
         //rotation
-        transform.Rotate(-mouse_distance.y * rotatespeed * Time.deltaTime, mouse_distance.x * rotatespeed * Time.deltaTime, roll * roll_speed * Time.deltaTime, Space.Self);
+        transform.Rotate(-mouseDistance.y * rotateSpeed * Time.deltaTime, mouseDistance.x * rotateSpeed * Time.deltaTime, roll * rollSpeed * Time.deltaTime, Space.Self);
 
         // set animation for active flight
         if (Input.GetAxisRaw("Vertical") > 0)
@@ -109,12 +109,12 @@ public class FlyingDino : MonoBehaviour
         {
             animator.SetBool("active_flight", false);
 
-            if (this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
+            if (this.rigidBody.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
             {
-                this.rigid_body.velocity = new Vector3(0, 0, 0);
+                this.rigidBody.velocity = new Vector3(0, 0, 0);
             }
 
-            if (this.rigid_body.velocity.magnitude < 30)
+            if (this.rigidBody.velocity.magnitude < 30)
             {
                 FindObjectOfType<AudioManager>().Play("Flapping");
             }
@@ -126,22 +126,22 @@ public class FlyingDino : MonoBehaviour
         }
 
         //speed instantiation
-        forward = Mathf.Lerp(forward, Input.GetAxisRaw("Vertical") * straight, forward_acc * Time.deltaTime);
+        forward = Mathf.Lerp(forward, Input.GetAxisRaw("Vertical") * straight, forwardAcc * Time.deltaTime);
         //sideward = Mathf.Lerp(sideward, Input.GetAxisRaw("Horizontal") * side, side_acc * Time.deltaTime);
         //upward = Mathf.Lerp(upward, Input.GetAxisRaw("Hover") * ascend, ascend_acc * Time.deltaTime);
 
         // change speed depending on look direction
-        if (mouse_distance.y > 1)
+        if (mouseDistance.y > 1)
         {
-            straight = straight_upwards;
+            straight = straightUpwards;
         }
-        else if (mouse_distance.y < -1)
+        else if (mouseDistance.y < -1)
         {
-            straight = straight_accelerated;
+            straight = straightAccelerated;
         }
         else
         {
-            straight = speed_base;
+            straight = speedBase;
         }
 
         // geht straight runter mit der Zeit?
@@ -167,7 +167,7 @@ public class FlyingDino : MonoBehaviour
         this.DISPLAY_FLOAT = Input.GetAxisRaw("Vertical") * straight;
 
         // set animation
-        if (this.rigid_body.velocity.magnitude < 50f)
+        if (this.rigidBody.velocity.magnitude < 50f)
         {
             animator.SetBool("idle_air", true);
 
@@ -183,53 +183,21 @@ public class FlyingDino : MonoBehaviour
         // if key is pressed dino will lower y position
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            this.rigid_body.AddForce(new Vector3(0f, -10f, 0f));
+            this.rigidBody.AddForce(new Vector3(0f, -10f, 0f));
         }
 
         Vector3 direction = transform.forward * forward * 30 * Time.deltaTime + transform.right * sideward * Time.deltaTime + transform.up * upward * Time.deltaTime;
 
         //the actual movement
-        this.rigid_body.AddForce(direction);
+        this.rigidBody.AddForce(direction);
     }
 
     void CameraFollows()
     {
         //camera movement
-        camera = transform.position - transform.forward * camera_distance_offset + Vector3.up * this.camera_height_offset;
+        camera = transform.position - transform.forward * cameraDistanceOffset + Vector3.up * this.cameraHeightOffset;
         Camera.main.transform.position = camera;
         Camera.main.transform.LookAt(transform.position + transform.forward * 30.0f);
-    }
-
-    public void Grow()
-    {
-        this.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-        this.camera_distance_offset += 0.5f;
-        this.camera_height_offset += 0.5f;
-        this.camera_height_offset += 0.5f;
-    }
-
-
-    void Borders()
-    {
-        //some borders
-        //x axis
-        if (transform.position.x < 0.0f)
-        {
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x > 1000.0f)
-        {
-            transform.position = new Vector3(1000f, transform.position.y, transform.position.z);
-        }
-        //z axis
-        if (transform.position.z < 0.0f)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
-        }
-        if (transform.position.z > 1000.0f)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1000.0f);
-        }
     }
 
     public void ShootFireBall()
@@ -247,7 +215,7 @@ public class FlyingDino : MonoBehaviour
 
         if (other.GetComponent<Collider>().tag == "Asteroid")
         {
-            level_sys.IncreaseScore();
+            levelSys.IncreaseScore();
         }
     }
 

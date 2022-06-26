@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &49617510 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5207908645889936042, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
-  m_PrefabInstance: {fileID: 1071103087}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &101088067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,7 +264,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2056670830}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2628,7 +2617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bb6bfbdede3d044a7756307030c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_sys: {fileID: 893842898}
+  levelSys: {fileID: 0}
   terrain: {fileID: 436683240}
 --- !u!1001 &1619430387
 PrefabInstance:
@@ -2877,6 +2866,17 @@ PrefabInstance:
     - {fileID: 3800828811691336912, guid: 0cc64aa3065a8c846bbf776ad45a102b, type: 3}
     - {fileID: 5418182440004882149, guid: 0cc64aa3065a8c846bbf776ad45a102b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0cc64aa3065a8c846bbf776ad45a102b, type: 3}
+--- !u!114 &1664212573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2173082024923458882, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
+  m_PrefabInstance: {fileID: 1071103087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1699030569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3777,12 +3777,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32782b4726724314fbe93daaa89b6846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leveltext: {fileID: 1561356704}
-  gametext: {fileID: 2006743861}
-  score_text: {fileID: 1850205559}
-  finalscore: {fileID: 1965724991}
-  level_sys: {fileID: 893842898}
-  collisions: {fileID: 49617510}
+  levelText: {fileID: 1561356704}
+  endText: {fileID: 2006743861}
+  currentScore: {fileID: 1850205559}
+  finalScore: {fileID: 1965724991}
+  levelSys: {fileID: 893842898}
+  lifes: {fileID: 1664212573}
   waveText: {fileID: 104506643}
 --- !u!1001 &2126708645
 PrefabInstance:
