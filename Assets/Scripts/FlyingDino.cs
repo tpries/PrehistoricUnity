@@ -234,6 +234,7 @@ public class FlyingDino : MonoBehaviour
 
     public void ShootFireBall()
     {
+
         Transform fireballTransform = Instantiate(fireballPrefab, transform.position + transform.forward*3 + new Vector3(0, 4, 0), Quaternion.identity);
 
         Vector3 shootDir = Vector3.Normalize(transform.forward);

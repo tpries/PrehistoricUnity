@@ -36,21 +36,18 @@ public class LevelSystem : MonoBehaviour
 
         texts = GameObject.FindGameObjectWithTag("Text").GetComponent<TextScript>();
         count = 0;
-        level = 1;
+        level = 0;
         life = 20;
         maxLifes = 20;
 
         Debug.Log("start");
 
         current_level_time = 0;
-
-        AsteroidShower();
     }
 
 
     void Update()
     {
-
         level_length = 20 + level * 2;
         
         current_level_time += Time.deltaTime;
@@ -58,9 +55,9 @@ public class LevelSystem : MonoBehaviour
         if (current_level_time >= level_length && AllAsteroidsDestroyed())
         {   
             current_level_time = 0;
-            Debug.Log("Level up! " + level);
-            AsteroidShower();
             level++;
+            texts.DisplayWaveNumber(level);
+            AsteroidShower();
         }
     }
 

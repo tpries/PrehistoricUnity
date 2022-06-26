@@ -26,7 +26,8 @@ public class TextScript : MonoBehaviour
     //For the collisionline
     public Image collisions;
 
-
+    [SerializeField]
+    private Text waveText;
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +97,37 @@ public class TextScript : MonoBehaviour
         {
             SceneManager.LoadScene("GameOverScene");
         }
+    }
+
+    public void DisplayWaveNumber(int waveNumber)
+    {
+        waveText.enabled = false;
+        waveText.text = "Wave " + waveNumber.ToString();
+
+        StartCoroutine(FadeText(waveText, 1f));
+    }
+
+    public IEnumerator FadeText(Text text, float t)
+    {
+
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+        text.enabled = true;
+        while (text.color.a < 1.0f)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + (Time.deltaTime / t));
+            yield return null;
+        }
+
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+
+        while (text.color.a > 0.0f)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - (Time.deltaTime / t));
+
+            yield return null;
+        }
+
+        text.enabled = false;
 
     }
 }

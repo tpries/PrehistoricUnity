@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7240702, g: 0.7304205, b: 0.66676414, a: 1}
+  m_IndirectSpecularColor: {r: 0.7240537, g: 0.7304292, b: 0.66676456, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -244,6 +244,86 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &104506641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 104506642}
+  - component: {fileID: 104506644}
+  - component: {fileID: 104506643}
+  m_Layer: 5
+  m_Name: Waves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &104506642
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104506641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2056670830}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 17, y: 0}
+  m_SizeDelta: {x: 320, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &104506643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104506641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &104506644
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104506641}
+  m_CullTransparentMesh: 1
 --- !u!4 &110352313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7259826502067671782, guid: 83be7a026e5eab24989ff46c931fb528, type: 3}
@@ -1662,16 +1742,20 @@ PrefabInstance:
       value: -1008
       objectReference: {fileID: 0}
     - target: {fileID: 2640679046133742661, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.530349
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640679046133742661, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.16762441
       objectReference: {fileID: 0}
     - target: {fileID: 2640679046133742661, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 10
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 2640679046133742661, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -254
+      value: -215
       objectReference: {fileID: 0}
     - target: {fileID: 5207908645889936042, guid: 1d19d6091a9c8cf4cb3e6d169433b1cf, type: 3}
       propertyPath: m_Type
@@ -3223,6 +3307,22 @@ MonoBehaviour:
     source: {fileID: 0}
     fadeTimeVolume: 0
     fadeTime: 0
+  - name: Fireball1
+    clip: {fileID: 8300000, guid: a66c254602ebb1643910d00da6fc186f, type: 3}
+    volume: 0.291
+    pitch: 1.02
+    maxVolume: 0.251
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
+  - name: Fireball2
+    clip: {fileID: 8300000, guid: eb4c76393c177c44694217862c7c96b1, type: 3}
+    volume: 0.291
+    pitch: 1.02
+    maxVolume: 0.251
+    source: {fileID: 0}
+    fadeTimeVolume: 0
+    fadeTime: 0
   explosions:
   - name: 0
     clip: {fileID: 8300000, guid: d386ba938c98b864f97b7e7a4e9ae7c5, type: 3}
@@ -3683,6 +3783,7 @@ MonoBehaviour:
   finalscore: {fileID: 1965724991}
   level_sys: {fileID: 893842898}
   collisions: {fileID: 49617510}
+  waveText: {fileID: 104506643}
 --- !u!1001 &2126708645
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,13 +11,20 @@ public class FireballScript : MonoBehaviour
     {
         this.base_speed = base_speed;
         this.movementDirection = dir;
+        FindObjectOfType<AudioManager>().PlayFireball();
+        StartCoroutine(SelfDestruct());
+        
     }
 
     private void Update()
     {
-        float moveSpeed = this.base_speed + 200f;
-        Debug.Log(moveSpeed + " - " + this.base_speed);
+        float moveSpeed = this.base_speed + 500f;
         transform.position += movementDirection * moveSpeed * Time.deltaTime;
     }
-    
+
+    IEnumerator SelfDestruct()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
+    }
 }
