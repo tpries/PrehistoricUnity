@@ -35,7 +35,6 @@ public class LevelSystem : MonoBehaviour
         life = 20;
         maxLifes = 20;
 
-        Debug.Log("start");
 
         currentLevelTime = 0;
     }
@@ -76,7 +75,6 @@ public class LevelSystem : MonoBehaviour
         spawnedAsteroids = new GameObject[(level+1) / 2];
 
         // create asteroids of asteroid shower
-        Debug.Log("# asteroids " + (level+1) / 2);
         for (int i = 0; i < (level+1) / 2; i++)
         {
             // instantiate new asteroid (spawn second asteroid higher)
@@ -92,14 +90,13 @@ public class LevelSystem : MonoBehaviour
         }
     }
 
-    //?
+    // check if all spawned asteroids are destroid
     private bool AllAsteroidsDestroyed()
     {
         if (spawnedAsteroids == null) return true;
 
         for (int i = 0; i > spawnedAsteroids.Length; i++)
         {
-            Debug.Log(spawnedAsteroids[i]);
             if (spawnedAsteroids[i] != null)
             {
                 return false;

@@ -1,6 +1,8 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
+// Sound class
+// everything is self explanatory here
 [System.Serializable]
 public class Sound
 {
@@ -23,7 +25,4 @@ public class Sound
     public float fadeTimeVolume;
 
     public float fadeTime;
-
-
-
 }

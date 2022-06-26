@@ -2,13 +2,19 @@ using UnityEngine.Audio;
 using UnityEngine;
 using System;
 
+/**
+ * This class handles the audio world of our game.
+ * It plays sounds and handles their volume and so on
+ * 
+ **/
+
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
     public Sound[] explosions;
 
-    // Start is called before the first frame update
+    // set volume and pitch and clip of every sound of sounds and explosions
     void Awake()
     {
         foreach (Sound s in sounds)
@@ -32,7 +38,10 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
+        // find sound in sounds
         Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        // only play sound if it's not playing already
         if (s != null && !s.source.isPlaying)
         {
 
@@ -41,12 +50,14 @@ public class AudioManager : MonoBehaviour
                 s.source.Play();
             }
             else
-            {
+            {   
+                // in case we want the wind to fade in, well start this coroutine
                 StartCoroutine(AudioHelper.FadeIn(s.source, s.fadeTime, s.volume));
             }
         }
     }
 
+    // basically same as above just reverted
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -64,6 +75,7 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    // we want to increase the volume fadingly at certain events for some sounds
     public void IncreaseVolume(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -75,6 +87,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // decrease the volume fadingly
     public void DecreaseVolume(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -84,6 +97,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // play explosion sound, separate function because we dont care if the sound is already playing
     public void PlayExplosion(int index)
     {
         Sound s = explosions[index];
@@ -93,6 +107,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // play fireball sound , separate function because we dont care if the sound is already playing
     public void PlayFireball()
     {
         Sound s = Array.Find(sounds, sound => sound.name == "Fireball2");

@@ -100,6 +100,8 @@ public class TextScript : MonoBehaviour
         }
     }
 
+    // Wave number is a text that should fade in and out
+    // start coroutine therefore
     public void DisplayWaveNumber(int waveNumber)
     {
         waveText.enabled = false;
@@ -108,6 +110,8 @@ public class TextScript : MonoBehaviour
         StartCoroutine(FadeText(waveText, 1f));
     }
 
+    // first fade text in, then out
+    // enable text at beginning and disable at end
     public IEnumerator FadeText(Text text, float t)
     {
 

@@ -7,23 +7,20 @@ using UnityEngine.UI;
 
 public class SceneHandler : MonoBehaviour
 {
-
+    // Start, Game, End
     public string state;
 
     public string mainScene;
 
     public Text blinkingText;
 
+    // values for the blinking text
     public float alphaStep;
-
     private float alpha;
-
     public Color color;
-
     private float alphaThresh;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         color = blinkingText.color;
@@ -31,9 +28,12 @@ public class SceneHandler : MonoBehaviour
         alphaThresh = 300;
     }
 
-    // Update is called once per frame
     void Update()
     {
+
+        // compute new alpha value
+        // this block of code will always first increase the alpha value to its max (1)
+        // and then decrease it to its min (0)
         alpha += alphaStep;
 
         if (alpha == alphaThresh)
@@ -45,20 +45,23 @@ public class SceneHandler : MonoBehaviour
 
         blinkingText.color = color;
 
+
         // start game on space down
         if (Input.GetKeyDown("space") && state.Equals("Start"))
         {
             LoadScene();
         }
 
+        // restart game if we are in the gameover screen
         if (Input.GetKeyDown(KeyCode.R) && state.Equals("GameOver"))
         {
             LoadScene();
         }
 
+        // quit application
         if (Input.GetKeyDown(KeyCode.Q) && state.Equals("GameOver"))
         {
-            // quit
+            Application.Quit();
         }
 
     }

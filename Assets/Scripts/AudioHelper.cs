@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// this class helps the audiomanager to let sound fade in and out or just change the volume in a fading manner
 public static class AudioHelper
 {
 
