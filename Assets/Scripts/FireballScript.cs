@@ -18,7 +18,7 @@ public class FireballScript : MonoBehaviour
 
     private void Update()
     {
-        float moveSpeed = this.base_speed + 500f;
+        float moveSpeed = this.base_speed + 800f;
         transform.position += movementDirection * moveSpeed * Time.deltaTime;
     }
 
@@ -26,5 +26,11 @@ public class FireballScript : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.GetComponent<Collider>().tag != "Dino") Destroy(gameObject);
     }
 }

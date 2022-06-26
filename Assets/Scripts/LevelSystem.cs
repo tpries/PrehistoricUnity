@@ -31,29 +31,31 @@ public class LevelSystem : MonoBehaviour
     // Update is called once per frame
     void Start()
     {   //instantiate
-        score = this.score;
-        fails = this.fails;
+        score = 59;
+        fails = 5;
 
         texts = GameObject.FindGameObjectWithTag("Text").GetComponent<TextScript>();
-        count = 0;
-        level = 0;
-        life = 20;
-        maxLifes = 20;
-
-        Debug.Log("start");
+        count = 10;
+        level = 22;
+        life = 5;
+        maxLifes = 10;
 
         current_level_time = 0;
+        texts.SetScore(score);
     }
 
 
     void Update()
     {
-        level_length = 20 + level * 2;
-        
+        level_length = 10;// + level * 2;
+
+        if (level == 0) level_length = 10;
+
+
         current_level_time += Time.deltaTime;
 
         if (current_level_time >= level_length && AllAsteroidsDestroyed())
-        {   
+        {
             current_level_time = 0;
             level++;
             texts.DisplayWaveNumber(level);
@@ -71,7 +73,7 @@ public class LevelSystem : MonoBehaviour
         // 3 Asteroids a bit further appart ...
 
         // get new seed position for asteroids
-        Vector3 shower_position_seed = new Vector3(Random.Range(2000, 4000), Random.Range(5000, 6000), Random.Range(2000, 8000));
+        Vector3 shower_position_seed = new Vector3(Random.Range(1000, 6000), Random.Range(3000, 4000), Random.Range(2000, 8000));
 
         // get prefab to instantiate
         GameObject asteroid = (GameObject)Resources.Load("prefabs/Asteroid", typeof(GameObject));
@@ -80,18 +82,17 @@ public class LevelSystem : MonoBehaviour
         spawned_asteroids = new GameObject[(level+1) / 2];
 
         // create asteroids of asteroid shower
-        Debug.Log("# asteroids " + (level+1) / 2);
         for (int i = 0; i < (level+1) / 2; i++)
         {
             // instantiate new asteroid (spawn second asteroid higher)
-            GameObject newAsteroid = Instantiate(asteroid, shower_position_seed + Random.insideUnitSphere * level * 200 + new Vector3(0,i * 500, 0), Quaternion.identity) as GameObject;
+            GameObject newAsteroid = Instantiate(asteroid, shower_position_seed + Random.insideUnitSphere * 800 + new Vector3(0,i * 200, 0), Quaternion.identity) as GameObject;
 
             // set asteroid scale and mass for speed
             //scale = Random.Range(20, 50);
             //newAsteroid.transform.localScale = new Vector3(scale, scale, scale);
-            float mass = 2;// scale;
+            float mass = 5;// scale;
             float side_wards_movement = Random.Range(-(mass * mass), (mass * mass));
-            newAsteroid.GetComponent<Rigidbody>().AddForce(Physics.gravity * (mass * mass) / 1.2f + new Vector3(side_wards_movement, 0, side_wards_movement));
+            newAsteroid.GetComponent<Rigidbody>().AddForce(Physics.gravity * (mass * mass) + new Vector3(side_wards_movement, 0, side_wards_movement));
 
             // collect spawned asteroid
             spawned_asteroids[i] = newAsteroid;
@@ -150,12 +151,11 @@ public class LevelSystem : MonoBehaviour
 
     private bool AllAsteroidsDestroyed()
     {
-        if (spawned_asteroids == null) return true;
+        if (this.spawned_asteroids == null) return true;
 
-        for (int i = 0; i > spawned_asteroids.Length; i++)
+        for (int i = 0; i < this.spawned_asteroids.Length; i++)
         {
-            Debug.Log(spawned_asteroids[i]);
-            if (spawned_asteroids[i] != null)
+            if (this.spawned_asteroids[i] != null)
             {
                 return false;
             }

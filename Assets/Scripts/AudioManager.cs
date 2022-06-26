@@ -86,6 +86,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayExplosion(int index)
     {
+        Debug.Log("played explosion");
+
         Sound s = explosions[index];
         if (s != null)
         {

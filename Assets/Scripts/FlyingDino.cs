@@ -23,11 +23,11 @@ public class FlyingDino : MonoBehaviour
     private float forward_acc = 100.0f;
 
     //mouse control, rotation
-    public float rotatespeed = 80.0f;
+    public float rotatespeed = 200.0f;
     private Vector2 lookInput, center, mouse_distance;
 
     private float roll;
-    public float roll_speed = 150f, roll_acc = 130.0f;
+    public float roll_speed = 300f, roll_acc = 300.0f;
 
     private Rigidbody rigid_body;
     private Animator animator;
@@ -57,7 +57,7 @@ public class FlyingDino : MonoBehaviour
         rigid_body.mass = 0.5f;
         rigid_body.angularDrag = 10f;
 
-        transform.position = new Vector3(3900f, 2300f, 700f);
+        transform.position = new Vector3(3900f, 1300, 700f);
 
         //instantiate the center of the screen
         center.x = Screen.width * 0.5f;
@@ -104,12 +104,14 @@ public class FlyingDino : MonoBehaviour
             animator.SetBool("active_flight", true);
             FindObjectOfType<AudioManager>().Play("Flapping");
 
+            forward = Mathf.Lerp(forward, Input.GetAxisRaw("Vertical") * straight, forward_acc * Time.deltaTime);
+
         }
         else
         {
             animator.SetBool("active_flight", false);
 
-            if (this.rigid_body.velocity.magnitude > 0 && Input.GetAxisRaw("Vertical") < 0)
+            if (this.rigid_body.velocity.magnitude >= 0 && Input.GetAxisRaw("Vertical") < 0)
             {
                 this.rigid_body.velocity = new Vector3(0, 0, 0);
             }
@@ -123,12 +125,12 @@ public class FlyingDino : MonoBehaviour
                 // stop flapping wings if no active flight or idle
                 FindObjectOfType<AudioManager>().Stop("Flapping");
             }
+
+            forward = 0;
+
         }
 
         //speed instantiation
-        forward = Mathf.Lerp(forward, Input.GetAxisRaw("Vertical") * straight, forward_acc * Time.deltaTime);
-        //sideward = Mathf.Lerp(sideward, Input.GetAxisRaw("Horizontal") * side, side_acc * Time.deltaTime);
-        //upward = Mathf.Lerp(upward, Input.GetAxisRaw("Hover") * ascend, ascend_acc * Time.deltaTime);
 
         // change speed depending on look direction
         if (mouse_distance.y > 1)

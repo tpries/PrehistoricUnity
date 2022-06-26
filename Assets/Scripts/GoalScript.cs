@@ -17,19 +17,28 @@ public class GoalScript : MonoBehaviour
         if (other.GetComponent<Collider>().tag == "Fireball")
         {
             GameObject.FindGameObjectWithTag("LevelSystem").GetComponent<LevelSystem>().IncreaseScore();
+            Explode(Random.Range(1, 4));
         }
-        Explode();
+        else if (other.GetComponent<Collider>().tag == "Terrain")
+        {
+            Explode(0);
+        }
+        else
+        {
+            Explode(Random.Range(1,4));
+        }
 
     }
 
-    void Explode()
+    void Explode(int index)
     {
 
         // play explosion sound
-        FindObjectOfType<AudioManager>().PlayExplosion(Random.Range(0, 4));
+        FindObjectOfType<AudioManager>().PlayExplosion(index);
 
         // explode
         GameObject explosion = (GameObject)Resources.Load("prefabs/Explosion", typeof(GameObject));
+        Debug.Log("explode");
         var expl = Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(expl, 3);
 

@@ -35,9 +35,6 @@ public class TextScript : MonoBehaviour
         leveltext.text = "Level: " + counter.ToString();
         gametext.text = "";
         finalscore.text = "";
-
-        score_text.text = "SCORE: 0";
-
     }
 
     // Update is called once per frame
@@ -50,8 +47,6 @@ public class TextScript : MonoBehaviour
         leveltext.text = "Level: " + counter.ToString();
 
         UpdateCollisions();
-
-
     }
 
     // BEAUTIFY
@@ -73,28 +68,15 @@ public class TextScript : MonoBehaviour
 
     public void SetScore(int score)
     {
-
-
-        // we encountered the problem that apparently more than one LevelSystem instance existed at runtime
-        // the other instance would then always set the value to 0
-        // this is our quick and hacky fix
-        if (score == 0) return;
-
-
         score_text.text = "SCORE: " + score.ToString();
     }
 
     public void SetFails(int fails)
     {
-
-        // we encountered the problem that apparently more than one LevelSystem instance existed at runtime
-        // the other instance would then always set the value to 0
-        // this is our quick and hacky fix
-        if (fails == 0) return;
-
         //after a certain amount of fails, the game will stop
         if (fails > level_sys.maxLifes)
         {
+            Debug.Log("what up");
             SceneManager.LoadScene("GameOverScene");
         }
     }
