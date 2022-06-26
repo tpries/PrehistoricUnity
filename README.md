@@ -2,7 +2,7 @@
 
 - authors Berit Eichler, Tom Pries
 - course: Introduction to Unity at University of Osnabrück 2022
-- link to video:
+- link to video: https://drive.google.com/file/d/1UYLiTKjk9KkUUX_rVrHak8NdSIKz57YR/view
 
 ### Introduction
 Asteroids raining down on earth are threatening to wipe out the dinosaurs. A couragous, fireball shooting Pterodactyl, our main character, is trying to save the dinosaurs 
